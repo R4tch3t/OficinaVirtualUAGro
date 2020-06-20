@@ -84,7 +84,7 @@ export function ProductsTable() {
       text: "Formato",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.ColorColumnFormatter,
+     // formatter: columnFormatters.ColorColumnFormatter,
     },
     {
       dataField: "action",
