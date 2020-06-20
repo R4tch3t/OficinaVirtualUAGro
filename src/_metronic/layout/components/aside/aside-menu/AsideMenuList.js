@@ -1523,18 +1523,35 @@ export function AsideMenuList({ layoutProps }) {
                   {/*begin::2 Level*/}
                   <li
                       className={`menu-item ${getMenuItemActive(
-                          "/react-bootstrap/alert"
+                          "/tramites/titulacion/lista"
                       )}`}
                       aria-haspopup="true"
                   >
-                    <NavLink className="menu-link" to="/react-bootstrap/alert">
+                    <NavLink className="menu-link" to="/tramites/titulacion/lista">
                       <i className="menu-bullet menu-bullet-dot">
                         <span/>
                       </i>
-                      <span className="menu-text">Alerts</span>
+                      <span className="menu-text">Lista</span>
                     </NavLink>
                   </li>
                   {/*end::2 Level*/}
+
+                  {/*begin::2 Level*/}
+                  <li
+                      className={`menu-item ${getMenuItemActive(
+                          "/tramites/titulacion/nuevo"
+                      )}`}
+                      aria-haspopup="true"
+                  >
+                    <NavLink className="menu-link" to="/tramites/titulacion/nuevo">
+                      <i className="menu-bullet menu-bullet-dot">
+                        <span/>
+                      </i>
+                      <span className="menu-text">Nuevo</span>
+                    </NavLink>
+                  </li>
+                  {/*end::2 Level*/}
+
                   </ul>
                 </ul>
               </div>

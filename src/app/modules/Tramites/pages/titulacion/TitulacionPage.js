@@ -8,68 +8,68 @@ import { ProductsUpdateStatusDialog } from "./products-update-status-dialog/Prod
 import { ProductsCard } from "./ProductsCard";
 import { ProductsUIProvider } from "./ProductsUIContext";
 
-export function ProductsPage({ history }) {
+export function TitulacionPage({ history }) {
   const productsUIEvents = {
     newProductButtonClick: () => {
-      history.push("/e-commerce/products/new");
+      history.push("/tramites/titulacion/nuevo");
     },
     openEditProductPage: (id) => {
-      history.push(`/e-commerce/products/${id}/edit`);
+      history.push(`/tramites/titulacion/${id}/edit`);
     },
     openDeleteProductDialog: (id) => {
-      history.push(`/e-commerce/products/${id}/delete`);
+      history.push(`/tramites/titulacion/${id}/delete`);
     },
     openDeleteProductsDialog: () => {
-      history.push(`/e-commerce/products/deleteProducts`);
+      history.push(`/tramites/titulacion/deleteProducts`);
     },
     openFetchProductsDialog: () => {
-      history.push(`/e-commerce/products/fetch`);
+      history.push(`/tramites/titulacion/fetch`);
     },
     openUpdateProductsStatusDialog: () => {
-      history.push("/e-commerce/products/updateStatus");
+      history.push("/tramites/titulacion/updateStatus");
     },
   };
 
   return (
     <ProductsUIProvider productsUIEvents={productsUIEvents}>
       <ProductsLoadingDialog />
-      <Route path="/e-commerce/products/deleteProducts">
+      <Route path="/tramites/titulacion/deleteProducts">
         {({ history, match }) => (
           <ProductsDeleteDialog
             show={match != null}
             onHide={() => {
-              history.push("/e-commerce/products");
+              history.push("/tramites/titulacion/lista");
             }}
           />
         )}
       </Route>
-      <Route path="/e-commerce/products/:id/delete">
+      <Route path="/tramites/titulacion/:id/delete">
         {({ history, match }) => (
           <ProductDeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push("/e-commerce/products");
+              history.push("/tramites/titulacion/lista");
             }}
           />
         )}
       </Route>
-      <Route path="/e-commerce/products/fetch">
+      <Route path="/tramites/titulacion/fetch">
         {({ history, match }) => (
           <ProductsFetchDialog
             show={match != null}
             onHide={() => {
-              history.push("/e-commerce/products");
+              history.push("/tramites/titulacion/lista");
             }}
           />
         )}
       </Route>
-      <Route path="/e-commerce/products/updateStatus">
+      <Route path="/tramites/titulacion/updateStatus">
         {({ history, match }) => (
           <ProductsUpdateStatusDialog
             show={match != null}
             onHide={() => {
-              history.push("/e-commerce/products");
+              history.push("/tramites/titulacion/lista");
             }}
           />
         )}

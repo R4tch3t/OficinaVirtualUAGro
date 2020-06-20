@@ -7,50 +7,52 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/customers/customersActions";
+import * as actions from "../../../_redux/products/productsActions";
+import * as uiHelpers from "../ProductsUIHelpers";
 import {
   getSelectRow,
   getHandlerTableChange,
   NoRecordsFoundMessage,
   PleaseWaitMessage,
   sortCaret,
-  headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
-import * as uiHelpers from "../CustomersUIHelpers";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
-import { useCustomersUIContext } from "../CustomersUIContext";
+import { useProductsUIContext } from "../ProductsUIContext";
+import tituloTableMock from "../../../__mocks__/tituloTableMock";
 
-export function CustomersTable() {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
+export function ProductsTable() {
+  // Products UI Context
+  const productsUIContext = useProductsUIContext();
+  const productsUIProps = useMemo(() => {
     return {
-      ids: customersUIContext.ids,
-      setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams,
-      setQueryParams: customersUIContext.setQueryParams,
-      openEditCustomerDialog: customersUIContext.openEditCustomerDialog,
-      openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
+      ids: productsUIContext.ids,
+      setIds: productsUIContext.setIds,
+      queryParams: productsUIContext.queryParams,
+      setQueryParams: productsUIContext.setQueryParams,
+      openEditProductPage: productsUIContext.openEditProductPage,
+      openDeleteProductDialog: productsUIContext.openDeleteProductDialog,
     };
-  }, [customersUIContext]);
+  }, [productsUIContext]);
 
-  // Getting curret state of customers list from store (Redux)
+  // Getting curret state of products list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.customers }),
+    (state) => ({ currentState: state.products }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
-
-  // Customers Redux state
+  // Products Redux state
   const dispatch = useDispatch();
   useEffect(() => {
-    // clear selections list
-    customersUIProps.setIds([]);
-    // server call by queryParams
-    dispatch(actions.fetchCustomers(customersUIProps.queryParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [customersUIProps.queryParams, dispatch]);
+    tituloTableMock().then((r) => {
+      // clear selections list
+      productsUIProps.setIds([]);
+      console.log(productsUIProps.queryParams);
+      // server call by queryParams
+      dispatch(actions.fetchProducts(productsUIProps.queryParams));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
+  }, [productsUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
     {
@@ -58,57 +60,39 @@ export function CustomersTable() {
       text: "ID",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "firstName",
-      text: "Firstname",
+      dataField: "Nombre",
+      text: "Nombre",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "lastName",
-      text: "Lastname",
+      dataField: "Activo",
+      text: "Activo",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "email",
-      text: "Email",
+      dataField: "Niveles",
+      text: "Niveles",
       sort: true,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: "gender",
-      text: "Gender",
-      sort: false,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "status",
-      text: "Status",
+      dataField: "formato",
+      text: "Formato",
       sort: true,
       sortCaret: sortCaret,
-      formatter: columnFormatters.StatusColumnFormatter,
-      headerSortingClasses,
-    },
-    {
-      dataField: "type",
-      text: "Type",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.TypeColumnFormatter,
+      formatter: columnFormatters.ColorColumnFormatter,
     },
     {
       dataField: "action",
       text: "Actions",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
-        openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
+        openEditProductPage: productsUIProps.openEditProductPage,
+        openDeleteProductDialog: productsUIProps.openDeleteProductDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -122,8 +106,8 @@ export function CustomersTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: customersUIProps.queryParams.pageSize,
-    page: customersUIProps.queryParams.pageNumber,
+    sizePerPage: productsUIProps.queryParams.pageSize,
+    page: productsUIProps.queryParams.pageNumber,
   };
   return (
     <>
@@ -136,21 +120,21 @@ export function CustomersTable() {
             >
               <BootstrapTable
                 wrapperClasses="table-responsive"
-                bordered={false}
                 classes="table table-head-custom table-vertical-center"
                 bootstrap4
+                bordered={false}
                 remote
                 keyField="id"
                 data={entities === null ? [] : entities}
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  customersUIProps.setQueryParams
+                  productsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: customersUIProps.ids,
-                  setIds: customersUIProps.setIds,
+                  ids: productsUIProps.ids,
+                  setIds: productsUIProps.setIds,
                 })}
                 {...paginationTableProps}
               >

@@ -1,4 +1,36 @@
-export default [
+import ip from "../../Auth/genVars/Ip"
+export let TITULACION_MOCK = [];
+export default () => new Promise(async (resolve, reject) => {
+  const sendUri = ip("3000", "api/tramites/");
+
+  const bodyJSON = {};
+
+  const response = await fetch(sendUri, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    //body: JSON.stringify(bodyJSON)
+  });
+
+  const responseJson = await response.json().then(r => {
+    console.log(r);
+    TITULACION_MOCK = [];
+    if (r.dataTramites) {
+      TITULACION_MOCK = r.dataTramites;
+      console.log(TITULACION_MOCK);
+      //resolve(r);
+      resolve(1);
+    } else {
+      resolve(0);
+    }
+
+  });
+
+  console.log(responseJson);
+});
+/*export default [
   {
     id: 1,
     model: "Elise",
@@ -611,4 +643,4 @@ export default [
     _createdDate: "12/08/2017",
     _updatedDate: "06/15/2011"
   }
-];
+];*/
