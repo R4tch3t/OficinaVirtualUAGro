@@ -18,17 +18,12 @@ import { RemarksUIProvider } from "../product-remarks/RemarksUIContext";
 import { Remarks } from "../product-remarks/Remarks";
 
 const initProduct = {
-  id: undefined,
-  model: "",
-  manufacture: "Pontiac",
-  modelYear: 2020,
-  mileage: 0,
-  description: "",
-  color: "Red",
-  price: 10000,
-  condition: 1,
-  status: 0,
-  VINCode: "",
+  //id: undefined,
+  nombre: "",
+  activo: 1,
+  niveles_educativos: "",
+  cve_formato_ns: "",
+  cve_formato_nms: "",
 };
 
 export function ProductEdit({
@@ -58,7 +53,7 @@ export function ProductEdit({
   }, [id, dispatch]);
 
   useEffect(() => {
-    let _title = id ? "" : "New Product";
+    let _title = id ? "" : "Nuevo tramite";
     if (productForEdit && id) {
       _title = `Edit product '${productForEdit.manufacture} ${productForEdit.model} - ${productForEdit.modelYear}'`;
     }
@@ -70,7 +65,13 @@ export function ProductEdit({
 
   const saveProduct = (values) => {
     if (!id) {
-      dispatch(actions.createProduct(values)).then(() => backToProductsList());
+      console.log(`save:`);
+      console.log(values);
+      //backToProductsList()
+      dispatch(actions.createProduct(values)).then(() =>{ 
+        
+        backToProductsList()
+      });
     } else {
       dispatch(actions.updateProduct(values)).then(() => backToProductsList());
     }
@@ -98,12 +99,12 @@ export function ProductEdit({
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
-            Back
+            Atras
           </button>
           {`  `}
           <button className="btn btn-light ml-2">
             <i className="fa fa-redo"></i>
-            Reset
+            Recargar
           </button>
           {`  `}
           <button
@@ -111,7 +112,7 @@ export function ProductEdit({
             className="btn btn-primary ml-2"
             onClick={saveProductClick}
           >
-            Save
+            Guardar
           </button>
         </CardHeaderToolbar>
       </CardHeader>
@@ -124,7 +125,7 @@ export function ProductEdit({
               role="tab"
               aria-selected={(tab === "basic").toString()}
             >
-              Basic info
+              Generar título
             </a>
           </li>
           {id && (

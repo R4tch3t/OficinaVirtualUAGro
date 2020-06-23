@@ -82,7 +82,7 @@ export function ProductsTable() {
     {
       dataField: "formato",
       text: "Formato",
-      sort: true,
+      sort: true, 
       sortCaret: sortCaret,
      // formatter: columnFormatters.ColorColumnFormatter,
     },

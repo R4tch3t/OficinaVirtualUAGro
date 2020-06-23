@@ -71,3 +71,8 @@ export const AVAILABLE_MANUFACTURES = [
   "Saab",
   "Toyota"
 ];
+
+export const AVAILABLE_ESTADOS = [
+  1,
+  0,
+];
