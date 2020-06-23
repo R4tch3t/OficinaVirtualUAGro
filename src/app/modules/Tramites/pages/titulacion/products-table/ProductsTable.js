@@ -72,6 +72,7 @@ export function ProductsTable() {
       text: "Activo",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
     },
     {
       dataField: "Niveles",

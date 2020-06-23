@@ -10,6 +10,6 @@ export const StatusColumnFormatter = (cellContent, row) => (
       ProductStatusCssClasses[row.status]
     } label-inline`}
   >
-    {ProductStatusTitles[row.status]}
+    {ProductStatusTitles[row.Activo]}
   </span>
 );
